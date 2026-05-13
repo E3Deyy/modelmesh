@@ -1,0 +1,27 @@
+# Dependencias
+node_modules/
+
+# Compilado
+dist/
+
+# Variables de entorno — NUNCA subir al repo
+.env
+.env.local
+.env.production
+
+# Logs
+*.log
+pino-*.log
+
+# Docker volumes (si se crean localmente)
+redis-data/
+prometheus-data/
+grafana-data/
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
