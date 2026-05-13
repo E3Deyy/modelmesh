@@ -77,18 +77,15 @@ export function buildApp() {
       },
     })
   })
-
   app.get('/metrics', async (_req, reply) => {
     const healthResults = await providerRegistry.healthCheckAll()
     for (const [name, result] of Object.entries(healthResults)){
       providerHealthGauge.set({ provider: name}, result.healthy ? 1 :0)
     }
-
     const metrics = await metricsRegistry.metrics()
     return reply
       .header('Content-Type', metricsRegistry.contentType)
       .send(metrics)
   })
-
   return app
 }
