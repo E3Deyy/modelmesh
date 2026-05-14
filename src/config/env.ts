@@ -10,6 +10,9 @@ const envSchema = z.object({
 
     REDIS_URL:z.string().url().default('redis://localhost:6379'),
     CACHE_TTL_SECONS: z.coerce.number().default(300), 
+    FALLBACK_BASE_URL: z.string().url().optional(),
+    FALLBACK_MODEL: z.string().optional(),
+    FALLBACK_API_KEY: z.string().optional(),
 })
 
 const parsed = envSchema.safeParse(process.env)
