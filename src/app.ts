@@ -7,6 +7,7 @@ import type { InferenceRequest } from './providers/types.js'
 import { cacheService } from './cache/cache.service.js'
 import { metricsRegistry } from './metrics/prometheus.js'
 import { providerHealthGauge } from './metrics/prometheus.js'
+import { fallbackEngine } from './routing/fallback.js'
 
 export function buildApp() {
   const app = Fastify({
@@ -30,6 +31,7 @@ export function buildApp() {
     timestamp: new Date().toISOString(),
     environment: env.NODE_ENV,
     providers,
+    circuits: fallbackEngine.getCircuitStats(),
     cache: cacheService.getStats(),
   })
 })

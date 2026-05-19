@@ -1,5 +1,6 @@
 import { providerRegistry } from '../providers/registry.js'
 import { cacheService } from '../cache/cache.service.js'
+import { fallbackEngine } from '../routing/fallback.js'
 import {
   requestsTotal,
   requestDuration,
@@ -13,7 +14,7 @@ export class InferenceService {
   async infer(
     request: InferenceRequest,
     providerName?: string
-  ): Promise<InferenceResponse> {
+  ): Promise<InferenceResponse & { attempts?: number}> {
 
     const cached = await cacheService.get(request)
     if (cached) {
@@ -24,15 +25,18 @@ export class InferenceService {
       return cached
     }
     cacheMissesTotal.inc()
+    
     const name = providerName ?? providerRegistry.list()[0]
     if (!name) throw new Error('No providers registered')
 
     const provider = providerRegistry.get(name)
-    const timer = requestDuration.startTimer({ provider: name })
+    const timer = requestDuration.startTimer({ provider: providerName ?? 'auto' })
 
     try {
-      const response = await provider.execute(request)
+      const response = await fallbackEngine.execute(request, providerName)
+
       timer()
+
       tokensTotal.inc(
         { provider: name, type: 'prompt' },
         response.usage.promptTokens
@@ -42,7 +46,7 @@ export class InferenceService {
         response.usage.completionTokens
       )
 
-      requestsTotal.inc({ provider: name, status: 'success' })
+      requestsTotal.inc({ provider: response.provider, status: 'success' })
 
       void cacheService.set(request, response)
 
@@ -51,7 +55,7 @@ export class InferenceService {
       return response
     } catch (err) {
       timer()
-      requestsTotal.inc({ provider: name, status: 'error' })
+      requestsTotal.inc({ provider: providerName ?? 'unknown', status: 'error' })
       throw err
     }
   }
