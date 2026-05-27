@@ -8,13 +8,28 @@ A production-grade AI gateway built with **Fastify** and **TypeScript** that rou
 
 ## Architecture
 
+```mermaid
+graph TD
+    Client[Client] --> Gateway[Fastify Gateway]
+    Gateway --> Cache{Redis Cache <br> SHA-256 keying}
+    
+    Cache -->|Hit: < 5ms| Client
+    Cache -->|Miss| CircuitBreaker[Fallback Engine <br> Circuit Breaker]
+    
+    CircuitBreaker --> LLM[LM Studio / OpenAI / Anthropic]
+    LLM --> Metrics[Prometheus metrics]
+    Metrics --> Grafana[Grafana dashboards]
+
+    %% Estilos para mejorar el diseño visual
+    style Client fill:#2d3748,stroke:#4a5568,stroke-width:2px,color:#fff
+    style Gateway fill:#1a202c,stroke:#3182ce,stroke-width:2px,color:#fff
+    style Cache fill:#2b6cb0,stroke:#2b6cb0,stroke-width:2px,color:#fff
+    style CircuitBreaker fill:#c53030,stroke:#c53030,stroke-width:2px,color:#fff
+    style LLM fill:#2f855a,stroke:#2f855a,stroke-width:2px,color:#fff
+    style Metrics fill:#d69e2e,stroke:#d69e2e,stroke-width:2px,color:#fff
+    style Grafana fill:#ed8936,stroke:#ed8936,stroke-width:2px,color:#fff
 ```
-Client → Fastify Gateway → Redis Cache (SHA-256 keying)
-                         → Fallback Engine (Circuit Breaker)
-                         → LM Studio / OpenAI / Anthropic
-                         → Prometheus metrics
-                         → Grafana dashboards
-```
+
 
 ### Design patterns used
 - **Circuit Breaker** — providers are isolated; failures don't cascade
