@@ -40,6 +40,7 @@ graph TD
 
 ---
 
+```mermaid
 graph TD
     A[Client Request] --> B[Fastify Gateway]
     B --> C{Cache Hit?}
@@ -49,7 +50,7 @@ graph TD
     F -- No --> G[Primary: LM Studio]
     F -- Sí --> H[Backup: OpenAI / Anthropic]
     B --> I[Prometheus + Grafana]
-
+```
 
 ---
 
