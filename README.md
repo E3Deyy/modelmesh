@@ -40,6 +40,19 @@ graph TD
 
 ---
 
+graph TD
+    A[Client Request] --> B[Fastify Gateway]
+    B --> C{Cache Hit?}
+    C -- Sí (<5ms) --> D[Redis Cache]
+    C -- No --> E[Fallback Engine]
+    E --> F[Circuit Breaker Active?]
+    F -- No --> G[Primary: LM Studio]
+    F -- Sí --> H[Backup: OpenAI / Anthropic]
+    B --> I[Prometheus + Grafana]
+
+
+---
+
 ## Stack
 
 | Layer | Technology |
