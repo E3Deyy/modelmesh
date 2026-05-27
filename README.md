@@ -257,4 +257,4 @@ That's it. The router, fallback engine, and metrics pick it up automatically.
 - [ ] BullMQ async job queue
 - [ ] Kubernetes manifests + HPA
 - [ ] OpenTelemetry distributed tracing
-- [ ] Benchmarking suite (autocannon)
+- [ ] Benchmarking suite (autocannon) or more
