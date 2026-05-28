@@ -137,7 +137,7 @@ curl -X POST http://localhost:3000/v1/chat/completions \
 
 ## Observability
 
-| Service | URL | Credentials |
+| Service | URL | Credentials | 
 |---|---|---|
 | Gateway API | http://localhost:3000 | — |
 | Prometheus | http://localhost:9090 | — |
