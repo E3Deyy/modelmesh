@@ -78,7 +78,7 @@ graph TD
 - LM Studio (or any OpenAI-compatible local model server)
 
 ### 1. Clone and install
-
+ 
 ```bash
 git clone https://github.com/E3Deyy/llm-inference-gateway
 cd llm-inference-gateway
