@@ -126,7 +126,7 @@ curl http://localhost:3000/health
 curl -X POST http://localhost:3000/v1/chat/completions \
   -H "Content-Type: application/json" \
   -d '{"messages":[{"role":"user","content":"What is an API gateway?"}]}'
-
+ 
 # Second identical request — served from cache in <5ms
 curl -X POST http://localhost:3000/v1/chat/completions \
   -H "Content-Type: application/json" \
