@@ -36,7 +36,7 @@ graph TD
 - **Cache-aside** — repeated prompts served in <5ms, zero model calls
 - **Plugin architecture** — new providers implement one interface (`IProvider`)
 - **Dependency inversion** — core logic never depends on concrete providers
-- **Fail fast** — Zod validates all environment variables at startup
+- **Fail fast** — Zod validates all environment variables at startup 
 
 ---
 
