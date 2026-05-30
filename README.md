@@ -220,7 +220,7 @@ infra/
 └── grafana/
 docker-compose.yml
 ```
-
+ 
 ---
 
 ## Adding a new provider
