@@ -205,7 +205,7 @@ Prometheus scrape endpoint.
 ---
 
 ## Project structure
-
+ 
 ```
 src/
 ├── config/        # Zod env validation
