@@ -66,7 +66,7 @@ graph TD
 - **Graceful shutdown** — SIGTERM/SIGINT handling, safe for Kubernetes
 - **Structured logging** — Pino JSON logs with request correlation
 - **Env validation** — Zod schema with hard fail on missing variables
-
+ 
 ---
 
 ## Getting started
