@@ -116,7 +116,7 @@ This starts Redis, Prometheus, and Grafana.
 pnpm dev
 ```
  
-### 5. Test it
+### 5. Test it:
  
 ```bash
 # Health check
