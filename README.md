@@ -5,7 +5,7 @@ A production-grade AI gateway built with **Fastify** and **TypeScript** that rou
 > Built as a portfolio project to demonstrate backend engineering, distributed systems patterns, and AI infrastructure concepts.
 
 ---
-  
+    
 ## Architecture
   
 ```mermaid
