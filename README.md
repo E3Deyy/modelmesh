@@ -7,7 +7,7 @@ A production-grade AI gateway built with **Fastify** and **TypeScript** that rou
 ---
   
 ## Architecture
-
+  
 ```mermaid
 graph TD
     Client[Client] --> Gateway[Fastify Gateway]
